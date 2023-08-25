@@ -10,8 +10,12 @@
             <TextBlock Text="{Binding FirstName}" />
         </DataTemplate>
 
-        <!-- Setting VirtualListItemBase.AutoLoad to true will load the item when it's set to ListViewItem.Content property -->
+        <!-- Setting VirtualListItemBase.AutoLoad to true will load the item when it's set to ListViewItem.DataContext property -->
         <Style TargetType="ListViewItem">
+            <Setter Property="dz:VirtualListItemBase.AutoLoad" Value="true" />
+        </Style>
+        <!-- Setting VirtualListItemBase.AutoLoad to true will load the item when it's set to DataGridRow.DataContext property -->
+        <Style TargetType="DataGridRow">
             <Setter Property="dz:VirtualListItemBase.AutoLoad" Value="true" />
         </Style>
 
@@ -80,6 +84,26 @@
                 </GridView>
             </ListView.View>
         </ListView>
+
+        <DataGrid
+            x:Name="dataGrid"
+            EnableRowVirtualization="True"
+            ScrollViewer.IsDeferredScrollingEnabled="True"
+            dz:VirtualListLoadingIndicator.IsAttached="True"
+            Height="200">
+            <DataGrid.Columns>
+               <DataGridTextColumn Width="60" Binding="{Binding Data.Id}" Header="Id" SortMemberPath="Id" />
+                <DataGridTextColumn Width="120" Binding="{Binding Data.FirstName}" Header="First Name" SortMemberPath="FirstName" />
+                <DataGridTextColumn Width="120" Binding="{Binding Data.LastName}" Header="Last Name" SortMemberPath="LastName" />
+                <DataGridTemplateColumn Width="100" Header="DataTemplate test">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ContentControl Content="{Binding Data}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
         
         <TextBlock>
             <Hyperlink NavigateUri="http://www.devzest.com/blog/post/WPF-Data-Virtualization.aspx" Click="Hyperlink_Click">http://www.devzest.com/blog/post/WPF-Data-Virtualization.aspx</Hyperlink>

@@ -75,6 +75,7 @@ namespace DevZest.DataVirtualizationDemo
         {
             VirtualList<Person> data = new VirtualList<Person>(this);
             listView.ItemsSource = data;
+            dataGrid.ItemsSource = data;
         }
 
         // This method helps to get dependency property value in another thread.

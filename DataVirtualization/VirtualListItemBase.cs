@@ -15,20 +15,31 @@ namespace DevZest.Windows.DataVirtualization
 
         static void OnAutoLoadChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            DependencyPropertyDescriptor dpd = DependencyPropertyDescriptor.FromProperty(ContentControl.ContentProperty, typeof(DependencyObject));
+            // DataGridRow is not ContentControl
+            //DependencyPropertyDescriptor dpd = DependencyPropertyDescriptor.FromProperty(ContentControl.ContentProperty), typeof(DependencyObject));
+            DependencyPropertyDescriptor dpd = DependencyPropertyDescriptor.FromProperty(FrameworkElement.DataContextProperty, typeof(DependencyObject));
             if (dpd == null)
+            {
                 return;
+            }
 
             bool isEnabled = (bool)e.NewValue;
             if (isEnabled)
-                dpd.AddValueChanged(d, OnContentChanged);
+                dpd.AddValueChanged(d, OnDataContextChanged);
             else
-                dpd.RemoveValueChanged(d, OnContentChanged);
+                dpd.RemoveValueChanged(d, OnDataContextChanged);
         }
 
         static void OnContentChanged(object sender, EventArgs e)
         {
             VirtualListItemBase item = ((DependencyObject)sender).GetValue(ContentControl.ContentProperty) as VirtualListItemBase;
+            if (item != null)
+                item.LoadAsync();
+        }
+
+        static void OnDataContextChanged(object sender, EventArgs e)
+        {
+            VirtualListItemBase item = ((DependencyObject)sender).GetValue(FrameworkElement.DataContextProperty) as VirtualListItemBase;
             if (item != null)
                 item.LoadAsync();
         }
