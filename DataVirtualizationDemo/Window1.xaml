@@ -106,7 +106,7 @@
         </DataGrid>
         
         <TextBlock>
-            <Hyperlink NavigateUri="http://www.devzest.com/blog/post/WPF-Data-Virtualization.aspx" Click="Hyperlink_Click">http://www.devzest.com/blog/post/WPF-Data-Virtualization.aspx</Hyperlink>
+            <Hyperlink NavigateUri="https://github.com/Chaoses-Ib/DevZest.DataVirtualization" Click="Hyperlink_Click">https://github.com/Chaoses-Ib/DevZest.DataVirtualization</Hyperlink>
         </TextBlock>
     </StackPanel>
 </Window>
