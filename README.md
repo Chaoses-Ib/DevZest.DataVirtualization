@@ -78,9 +78,9 @@ public sealed class VirtualListItem<T> : VirtualListItemBase, INotifyPropertyCha
 You can data binding `VirtualListItem<T>` just like any other object. The following XAML code binds ListView column to `VirtualList<Person>` object (please note the binding path `Data.PropertyName` is used):
 
 ```xaml
-<GridViewColumn Width="60" DisplayMemberBinding="{Binding **Data.Id**}" Header="Id" .. />
-<GridViewColumn Width="120" DisplayMemberBinding="{Binding **Data.FirstName**}" Header="First Name" .. />
-<GridViewColumn Width="120" DisplayMemberBinding="{Binding **Data.LastName**}" Header="Last Name" .. />
+<GridViewColumn Width="60" DisplayMemberBinding="{Binding Data.Id}" Header="Id" .. />
+<GridViewColumn Width="120" DisplayMemberBinding="{Binding Data.FirstName}" Header="First Name" .. />
+<GridViewColumn Width="120" DisplayMemberBinding="{Binding Data.LastName}" Header="Last Name" .. />
 ```
 
 Data is loaded explicitly: unless `Load` or `LoadAsync` is called, the `IsLoaded` will always be `false` and `Data` will always be `default(T)`. Once data loaded, it will remain unchanged until the whole list is refreshed. Calling `Load` or `LoadAsync` will load one page of data items if not already loaded, and the first page will be loaded asynchronously when the collection is created or refreshed.
@@ -94,7 +94,7 @@ By setting `ContentControl`'s `VirtualListItemBase.AutoLoad` attached property t
 </Style>
 ```
 
-**Summary:**`VirtualListItem<T> object acts as proxy of the real data. Selection works well as if all data stored locally, and data is loaded as needed, in a separate thread, without blocking the UI.
+**Summary:** `VirtualListItem<T>` object acts as proxy of the real data. Selection works well as if all data stored locally, and data is loaded as needed, in a separate thread, without blocking the UI.
 
 ## Data Loading Visual Feedback
 
