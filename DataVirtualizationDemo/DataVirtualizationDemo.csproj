@@ -95,7 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataVirtualization\DataVirtualization.csproj">
-      <Project>{48E0EB7C-30B3-4A98-89BC-732039BEF625}</Project>
+      <Project>{cd8391c9-df86-4791-91e6-e5a45e7a3f06}</Project>
       <Name>DataVirtualization</Name>
     </ProjectReference>
   </ItemGroup>

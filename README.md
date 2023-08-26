@@ -1,4 +1,5 @@
 # DevZest.DataVirtualization
+[![NuGet](http://img.shields.io/nuget/v/DevZest.DataVirtualization.svg)](https://www.nuget.org/packages/DevZest.DataVirtualization)
 
 > The original post can be accessed from Internet Archive: [The DevZest Blog | WPF Data Virtualization](http://web.archive.org/web/20180814144210/http://www.devzest.com:80/blog/post/WPF-Data-Virtualization.aspx)
 
