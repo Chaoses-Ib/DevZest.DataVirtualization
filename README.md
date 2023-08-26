@@ -229,6 +229,8 @@ public IList<Person> LoadRange(int startIndex, int count, SortDescriptionCollect
     SortDescription sortDescription = sortDescriptions == null || sortDescriptions.Count == 0 ? new SortDescription() : sortDescriptions[0];
     ListSortDirection direction = string.IsNullOrEmpty(sortDescription.PropertyName) ? ListSortDirection.Ascending : sortDescription.Direction;
 
+    count = Math.Min(count, overallCount - startIndex);
+
     Person[] persons = new Person[count];
     for (int i = 0; i < count; i++)
     {
