@@ -1,6 +1,6 @@
 # DevZest.DataVirtualization
 
-[The DevZest Blog | WPF Data Virtualization](http://web.archive.org/web/20180814144210/http://www.devzest.com:80/blog/post/WPF-Data-Virtualization.aspx)
+> The original post can be accessed from Internet Archive: [The DevZest Blog | WPF Data Virtualization](http://web.archive.org/web/20180814144210/http://www.devzest.com:80/blog/post/WPF-Data-Virtualization.aspx)
 
 ![DataVirtualization](images/DataVirtualization.jpg)
 
@@ -18,9 +18,9 @@ The attached source code contains a highly reusable component which resolves all
 
 First of all, your UI should only demand data items actually visible on screen. As of .NET 3.5 SP1, this is what you can do for `ItemsControl` and derivatives:
 
-- Make the number of UI elements to be created proportional to what is visible on screen using`VirtualizingStackPanel.IsVirtualizing="True"`.
-- Have the framework recycle item containers instead of (re)creating them each time, by setting`VirtualizingStackPanel.VirtualizationMode="Recycling"`.
-- Defer scrolling while the scrollbar is in action by using `ScrollViewer.IsDeferredScrollingEnabled="True"`. This improves *perceived* performance, by waiting until the user releases the scrollbar thumb to update the content.
+- Make the number of UI elements to be created proportional to what is visible on screen using [`VirtualizingStackPanel.IsVirtualizing="True"`](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.virtualizingstackpanel.isvirtualizing?view=netframework-4.0).
+- Have the framework recycle item containers instead of (re)creating them each time, by setting [`VirtualizingStackPanel.VirtualizationMode="Recycling"`](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.virtualizationmode?view=netframework-4.8).
+- Defer scrolling while the scrollbar is in action by using [`ScrollViewer.IsDeferredScrollingEnabled="True"`](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.scrollviewer.isdeferredscrollingenabled?view=netframework-4.8). This improves *perceived* performance, by waiting until the user releases the scrollbar thumb to update the content.
 
 For more information, please read [this post](http://web.archive.org/web/20180814144210/http://social.msdn.microsoft.com/Forums/en-US/wpf/thread/98090161-0abf-4799-bbcb-852dcc0f0608).
 
@@ -341,6 +341,34 @@ A simple WPF window with a `ListView` was created to allow the user to experimen
 
 That's all! Hope you will enjoy using this component.
 
+## Appendix: DataGrid
+
+`VirtualList<T>` can also be applied to `DataGrid`:
+
+```xaml
+<DataGrid
+    x:Name="dataGrid"
+    EnableRowVirtualization="True"
+    ScrollViewer.IsDeferredScrollingEnabled="True"
+    dz:VirtualListLoadingIndicator.IsAttached="True"
+    Height="200">
+    <DataGrid.Columns>
+        <DataGridTextColumn Width="60" Binding="{Binding Data.Id}" Header="Id" SortMemberPath="Id" />
+        <DataGridTextColumn Width="120" Binding="{Binding Data.FirstName}" Header="First Name" SortMemberPath="FirstName" />
+        <DataGridTextColumn Width="120" Binding="{Binding Data.LastName}" Header="Last Name" SortMemberPath="LastName" />
+        <DataGridTemplateColumn Width="100" Header="DataTemplate test">
+            <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                    <ContentControl Content="{Binding Data}" />
+                </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+    </DataGrid.Columns>
+</DataGrid>
+```
+
+However, [`DataGridRow`](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.datagridrow?view=netframework-4.8) is not a `ContentControl`. `AutoLoad` needs to depend on `FrameworkElement.DataContextProperty` (or `DataGridRow.Item`) instead of `ContentControl.ContentProperty` to work.
+
 ## License
 
 This component and the demo application, is under MIT license:
@@ -352,3 +380,6 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+## See Also
+- [How to sort data virtualized items in WPF](https://github.com/bstollnitz/old-wpf-blog/tree/master/64-DataVirtualizationFilteringSorting)

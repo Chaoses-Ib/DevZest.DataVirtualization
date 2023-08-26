@@ -92,7 +92,7 @@
             dz:VirtualListLoadingIndicator.IsAttached="True"
             Height="200">
             <DataGrid.Columns>
-               <DataGridTextColumn Width="60" Binding="{Binding Data.Id}" Header="Id" SortMemberPath="Id" />
+                <DataGridTextColumn Width="60" Binding="{Binding Data.Id}" Header="Id" SortMemberPath="Id" />
                 <DataGridTextColumn Width="120" Binding="{Binding Data.FirstName}" Header="First Name" SortMemberPath="FirstName" />
                 <DataGridTextColumn Width="120" Binding="{Binding Data.LastName}" Header="Last Name" SortMemberPath="LastName" />
                 <DataGridTemplateColumn Width="100" Header="DataTemplate test">
